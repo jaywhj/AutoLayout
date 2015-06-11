@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+
+    //可以通过代码修改约束的值
+    self.centerSpace.constant = 40;
 }
 
 - (void)didReceiveMemoryWarning {
