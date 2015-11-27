@@ -19,68 +19,6 @@
     // Do any additional setup after loading the view.
     
     
-#pragma mark - 属性解释
-    /*
-     typedef NS_ENUM(NSInteger, NSLayoutRelation) {
-         NSLayoutRelationLessThanOrEqual = -1,          //小于等于
-         NSLayoutRelationEqual = 0,                     //等于
-         NSLayoutRelationGreaterThanOrEqual = 1,        //大于等于
-     };
-     typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
-         NSLayoutAttributeLeft = 1,                     //左侧
-         NSLayoutAttributeRight,                        //右侧
-         NSLayoutAttributeTop,                          //上方
-         NSLayoutAttributeBottom,                       //下方
-         NSLayoutAttributeLeading,                      //首部
-         NSLayoutAttributeTrailing,                     //尾部
-         NSLayoutAttributeWidth,                        //宽度
-         NSLayoutAttributeHeight,                       //高度
-         NSLayoutAttributeCenterX,                      //X轴中心
-         NSLayoutAttributeCenterY,                      //Y轴中心
-         NSLayoutAttributeBaseline,                     //文本底标线
-         
-         NSLayoutAttributeNotAnAttribute = 0            //没有属性
-     };
-     
-     //NSLayoutAttributeLeft/NSLayoutAttributeRight 和 NSLayoutAttributeLeading/NSLayoutAttributeTrailing的区别是：left/right永远是指左右，而leading/trailing在某些从右至左习惯的地区（希伯来语等）会变成，leading是右边，trailing是左边
-     */
-    
-    
-#pragma mark - 创建一个约束
-    /*
-     创建一个约束，参数说明:
-         第一个参数:指定约束左边的视图view1
-         第二个参数:指定view1的属性attr1，具体见上面的 NSLayoutAttribute。
-         第三个参数:指定左右两边的视图的关系relation，具体见上面的 NSLayoutRelation。
-         第四个参数:指定约束右边的视图view2
-         第五个参数:指定view2的属性attr2，具体见上面的 NSLayoutAttribute。
-         第六个参数:指定一个与view2属性相乘的乘数multiplier
-         第七个参数:指定一个与view2属性相加的浮点数constant
-
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                     constraintWithItem:<#(id)#>
-                                     attribute:<#(NSLayoutAttribute)#>
-                                     relatedBy:<#(NSLayoutRelation)#>
-                                     toItem:<#(id)#>
-                                     attribute:<#(NSLayoutAttribute)#>
-                                     multiplier:<#(CGFloat)#>
-                                     constant:<#(CGFloat)#>];
-
-    //这个函数的对照公式为: view1.attr1 = view2.attr2 * multiplier + constant
-    //如下面翻译过来就是：view1的左侧 等于 view2的右侧乘以1 再多10个点 的地方。
-    [NSLayoutConstraint constraintWithItem:view1
-                             attribute:NSLayoutAttributeLeft
-                             relatedBy:NSLayoutRelationEqual
-                             toItem:view2
-                             attribute:NSLayoutAttributeRight
-                             multiplier:1
-                             constant:10];
-    */
-    
-    //如果你想设置的约束里不需要第二个view，要将第四个参数设为nil，第五个参数设为NSLayoutAttributeNotAnAttribute
-    
-    
-
 #pragma mark - 创建一组约束
     /*
     使用VFL创建一组约束，参数说明:
@@ -106,58 +44,135 @@
      4、"＠" 表示优先级。如V:|-50@750-[view(55)]，或者写到metrics里面更好
      */
     
-    //用代码实现和上一个ViewCtrl一样的效果。正常的创建按钮，但不用设置按钮的Frame
-    UIButton * leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.backgroundColor = [UIColor colorWithRed:0.720 green:1.000 blue:0.366 alpha:1.000];
-    [leftButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:leftButton];
+    //用代码实现和上一个viewCtrl一样的效果。使用了autolayout就应该忘掉frame，设置了frame也没用
+    UIView * leftView = [[UIView alloc] init];
+    leftView.backgroundColor = [UIColor colorWithRed:0.720 green:1.000 blue:0.366 alpha:1.000];
+    [self.view addSubview:leftView];
     
-    UIButton * rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.928 blue:0.341 alpha:1.000];
-    [rightButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightButton];
+    UIView * rightView = [[UIView alloc] init];
+    rightView.backgroundColor = [UIColor colorWithRed:1.000 green:0.928 blue:0.341 alpha:1.000];
+    [self.view addSubview:rightView];
     
-    UIButton * bottomButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bottomButton setBackgroundColor:[UIColor lightGrayColor]];
-    [bottomButton setTitle:@"返回" forState:UIControlStateNormal];
-    [bottomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bottomButton.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
-    [bottomButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    bottomButton.backgroundColor = [UIColor colorWithRed:0.401 green:0.698 blue:0.752 alpha:1.000];
-    [self.view addSubview:bottomButton];
+    UIView * bottomView = [[UIView alloc] init];
+    bottomView.backgroundColor = [UIColor colorWithRed:0.401 green:0.698 blue:0.752 alpha:1.000];
+    [self.view addSubview:bottomView];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.backgroundColor = [UIColor grayColor];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:backButton];
+    
     
     //关闭 autoresizingMask 转换成 约束
-    [leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [rightButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [bottomButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [leftView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [rightView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [bottomView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [backButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     
+    
+    
+    
+    //设置VFL语言里面的变量和对应的view绑定。就是把所有和布局有关的view都放一起，用哪个取哪个
+    NSDictionary *varViews = NSDictionaryOfVariableBindings(leftView, rightView, bottomView, backButton);
+    //定义度量，会把VFL里面用到key的地方自动替换成对应的value。 水平方向间隙hSpace为20, 垂直方向间隙vSpace为20, 上边距加上电池条的高度为40
+    NSDictionary *metrics = @{@"hSpace":@20, @"vSpace":@20, @"topSpace":@40};
+    
+    //创建水平方向leftView、rightView的约束：从左至右依次为 -> 在水平方向，边界往右20像素为leftView，leftView再往右20像素为rightView，rightView的宽等于leftView，rightView往右20像素为边界
+    NSArray *hTopArr = [NSLayoutConstraint
+                        constraintsWithVisualFormat:@"H:|-hSpace-[leftView]-hSpace-[rightView(==leftView)]-hSpace-|"
+                        options:NSLayoutFormatDirectionLeadingToTrailing
+                        metrics:metrics
+                        views:varViews];
+    
+    //创建水平方向bottomView的约束：从左至右依次为 -> 在水平方向，边界往右20像素为bottomView，bottomView往右20像素为边界
+    NSArray *hBottomArr = [NSLayoutConstraint
+                           constraintsWithVisualFormat:@"H:|-hSpace-[bottomView]-hSpace-|"
+                           options:NSLayoutFormatDirectionLeadingToTrailing
+                           metrics:metrics
+                           views:varViews];
+    
+    //创建竖直方向leftView、bottomView的约束：从上到下依次为 -> 在竖直方向上，边界往下40像素为leftView，leftView往下20像素为bottomView，bottomView的高等于leftView，bottomView再往下20像素为边界
+    NSArray *vLeftArr = [NSLayoutConstraint
+                         constraintsWithVisualFormat:@"V:|-topSpace-[leftView]-vSpace-[bottomView(==leftView)]-vSpace-|"
+                         options:NSLayoutFormatDirectionLeadingToTrailing
+                         metrics:metrics
+                         views:varViews];
+    
+    //创建竖直方向rightView的约束：从上到下依次为 -> 在竖直方向上，边界往下40像素为rightView，rightView的高等于leftView
+    NSArray *vRightArr = [NSLayoutConstraint
+                          constraintsWithVisualFormat:@"V:|-topSpace-[rightView(==leftView)]"
+                          options:NSLayoutFormatDirectionLeadingToTrailing
+                          metrics:metrics
+                          views:varViews];
     
     //创建一个存放约束的数组
     NSMutableArray * tempConstraints = [NSMutableArray array];
-    
-    //创建水平方向leftButton、rightButton的约束：从左至右依次为 -> 在水平方向，边界往右20像素为leftButton，leftButton再往右20像素为rightButton，rightButton的宽等于leftButton，rightButton往右20像素为边界
-    [tempConstraints addObjectsFromArray:[NSLayoutConstraint
-        constraintsWithVisualFormat:@"H:|-20-[leftButton]-20-[rightButton(==leftButton)]-20-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(leftButton, rightButton)]];
-    
-    //创建水平方向bottomButton的约束：从左至右依次为 -> 在水平方向，边界往右20像素为bottomButton，bottomButton往右20像素为边界
-    [tempConstraints addObjectsFromArray:[NSLayoutConstraint
-        constraintsWithVisualFormat:@"H:|-20-[bottomButton]-20-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomButton)]];
-
-    //创建竖直方向leftButton、bottomButton的约束：从上到下依次为 -> 在竖直方向上，边界往下40像素为leftButton，leftButton往下20像素为bottomButton，bottomButton的高等于leftButton，bottomButton再往下20像素为边界
-    [tempConstraints addObjectsFromArray:[NSLayoutConstraint
-        constraintsWithVisualFormat:@"V:|-40-[leftButton]-20-[bottomButton(==leftButton)]-20-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(leftButton, bottomButton)]];
-    
-    //创建竖直方向rightButton的约束：从上到下依次为 -> 在竖直方向上，边界往下40像素为rightButton，rightButton的高等于leftButton
-    [tempConstraints addObjectsFromArray:[NSLayoutConstraint
-        constraintsWithVisualFormat:@"V:|-40-[rightButton(==leftButton)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(rightButton,leftButton)]];
-    
+    [tempConstraints addObjectsFromArray:hTopArr];
+    [tempConstraints addObjectsFromArray:hBottomArr];
+    [tempConstraints addObjectsFromArray:vLeftArr];
+    [tempConstraints addObjectsFromArray:vRightArr];
     
     //给视图添加约束
-//    [self.view addConstraint:<#(NSLayoutConstraint *)#>];
     [self.view addConstraints:tempConstraints];
+    
+    
+    
+#pragma mark - 属性解释
+    /*
+    typedef NS_ENUM(NSInteger, NSLayoutRelation) {
+        NSLayoutRelationLessThanOrEqual = -1,          //小于等于
+        NSLayoutRelationEqual = 0,                     //等于
+        NSLayoutRelationGreaterThanOrEqual = 1,        //大于等于
+    };
+    typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
+        NSLayoutAttributeLeft = 1,                     //左侧
+        NSLayoutAttributeRight,                        //右侧
+        NSLayoutAttributeTop,                          //上方
+        NSLayoutAttributeBottom,                       //下方
+        NSLayoutAttributeLeading,                      //首部
+        NSLayoutAttributeTrailing,                     //尾部
+        NSLayoutAttributeWidth,                        //宽度
+        NSLayoutAttributeHeight,                       //高度
+        NSLayoutAttributeCenterX,                      //X轴中心
+        NSLayoutAttributeCenterY,                      //Y轴中心
+        NSLayoutAttributeBaseline,                     //文本底标线
+        
+        NSLayoutAttributeNotAnAttribute = 0            //没有属性
+    };
+    
+    //NSLayoutAttributeLeft/NSLayoutAttributeRight 和 NSLayoutAttributeLeading/NSLayoutAttributeTrailing的区别是：left/right永远是指左右，而leading/trailing在某些从右至左习惯的地区（希伯来语等）会变成，leading是右边，trailing是左边
+    */
+    
+    
+#pragma mark - 创建一个约束
+    
+    //设置backButton垂直、水平居中（使用单个约束）
+    /*
+     1、函数的对照公式为: withItem.attr1 = toItem.attr2 * multiplier + constant
+     2、如下翻译过来就是：backButton的中心点x 等于 bottomView的中心点x乘以1 再多0
+     3、如果想设置的约束里不需要toItem，要将第四个参数设为nil，第五个参数设为NSLayoutAttributeNotAnAttribute
+     */
+    NSLayoutConstraint *xBtnLayout = [NSLayoutConstraint
+                                      constraintWithItem:backButton
+                                      attribute:NSLayoutAttributeCenterX
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:bottomView attribute:NSLayoutAttributeCenterX
+                                      multiplier:1
+                                      constant:0];
+    NSLayoutConstraint *yBtnLayout = [NSLayoutConstraint
+                                      constraintWithItem:backButton
+                                      attribute:NSLayoutAttributeCenterY
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:bottomView attribute:NSLayoutAttributeCenterY
+                                      multiplier:1
+                                      constant:0];
+    [bottomView addConstraints:@[xBtnLayout, yBtnLayout]];
+    
 }
 
-#pragma mark -
+#pragma mark - 自定义方法
 -(void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];

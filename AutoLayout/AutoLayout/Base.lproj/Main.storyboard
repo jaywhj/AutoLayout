@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ism-ah-j0N">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ism-ah-j0N">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -38,8 +38,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.40063067250000001" green="0.69844823519999999" blue="0.75249123090000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="WdV-fP-SmD" secondAttribute="centerX" id="9TP-aa-xeQ"/>
-                                    <constraint firstAttribute="centerY" secondItem="WdV-fP-SmD" secondAttribute="centerY" id="C8y-Ke-3ZL"/>
+                                    <constraint firstAttribute="centerX" secondItem="WdV-fP-SmD" secondAttribute="centerX" constant="-0.5" id="9TP-aa-xeQ"/>
+                                    <constraint firstAttribute="centerY" secondItem="WdV-fP-SmD" secondAttribute="centerY" constant="0.5" id="C8y-Ke-3ZL"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIP-tE-vUD">
@@ -66,9 +66,6 @@
                     <navigationItem key="navigationItem" id="B5e-M3-qwp"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="centerSpace" destination="pSv-MR-GiR" id="SzO-Et-SA3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,9 +107,4 @@
             <point key="canvasLocation" x="-488" y="224"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

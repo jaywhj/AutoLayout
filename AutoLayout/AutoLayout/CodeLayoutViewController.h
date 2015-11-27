@@ -10,6 +10,6 @@
 
 @interface CodeLayoutViewController : UIViewController
 
-//代码 自动布局
+//纯代码 自动布局
 
 @end

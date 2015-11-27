@@ -20,8 +20,5 @@
 //Icon and Image Sizes
 //https://developer.apple.com/library/ios/documentation/userexperience/conceptual/mobilehig/IconMatrix.html
 
-//http://blog.csdn.net/list_chen/article/details/40857969
-
-
 //iOS8中LaunchImage和LaunchScreen的完美结合
 //http://www.simpleapples.com/2014/10/launchsreen-and-launchimage/
