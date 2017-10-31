@@ -11,6 +11,7 @@
 
 ## Markdown 实用小技巧
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 [TOC]
 > Markdown 是一种轻量级的「标记语言」，目前也被越来越多的写作爱好者、撰稿者广泛使用。请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单，常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。
@@ -229,8 +230,8 @@ Markdown到底是什么？[^footnote1]
 
 	* **行内公式** 用 `$` 开头结尾：`$x - y$` 展示为 $x - y$
 	* **行间公式** 用 `$$` 开头结尾：
-		`$$x - y$$` 展示为 $$x - y$$
-		`$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$` 展示为 $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+		`$$x - y$$` 展示为 \\(x - y\\)
+		`$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$` 展示为 \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
 	
 	* **除法** 用 `\frac`
 
@@ -268,7 +269,7 @@ Markdown到底是什么？[^footnote1]
 	* **求和** $\sum$ 用 `\sum`
 	
 		`$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$` 展示为 $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
-		`$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$` 展示为 $$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$
+		`$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$` 展示为 \\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\\)
 		
 		<font color=red>右键上面公式有惊喜（语言选中文再看看）</font>
 
